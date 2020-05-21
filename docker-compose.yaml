@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  mysql-service:
+    image: mysql:5.7
+    networks:
+      - antena-network
+    environment:
+      - MYSQL_ROOT_PASSWORD={MYSQL_ROOT_PASSWORD}
+    restart: always
+    
+  web-service:
+    image: mateusmsouza4/antenas-project
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_ADDRESS=mysql-service
+    networks:
+      - antena-network
+    depends_on:
+      - mysql-service
+      
+networks:
+  antena-network:
+    driver: bridge
