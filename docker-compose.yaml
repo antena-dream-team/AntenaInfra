@@ -7,18 +7,26 @@ services:
       - antena-network
     environment:
       - MYSQL_ROOT_PASSWORD={MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER={MYSQL_USER}
+      - MYSQL_PASSWORD={MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=AccountSystem
+
     restart: always
     
   web-service:
     image: mateusmsouza4/antenas-project
     ports:
-      - "4000:4000"
+      - "8080:8080"
     environment:
-      - DB_ADDRESS=mysql-service
+      - DB_USERNAME={MYSQL_USER}
+      - DB_PASSWORD={MYSQL_ROOT_PASSWORD}
+      - DB_HOST=jdbc:mysql://mysql-service:3306/AccountSystem?useTimezone=true&serverTimezone=UTC
     networks:
       - antena-network
     depends_on:
       - mysql-service
+
+    restart: on-failure
       
 networks:
   antena-network:
