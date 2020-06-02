@@ -6,9 +6,9 @@ services:
     networks:
       - antena-network
     environment:
-      - MYSQL_ROOT_PASSWORD={MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER={MYSQL_USER}
-      - MYSQL_PASSWORD={MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=AccountSystem
 
     restart: always
@@ -18,9 +18,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DB_USERNAME={MYSQL_USER}
-      - DB_PASSWORD={MYSQL_ROOT_PASSWORD}
-      - DB_HOST=jdbc:mysql://mysql-service:3306/AccountSystem?useTimezone=true&serverTimezone=UTC
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_HOST=jdbc:mysql://mysql-service:3306/AccountSystem?useTimezone=true&serverTimezone=UTC&useSSL=false
     networks:
       - antena-network
     depends_on:
