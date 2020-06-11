@@ -11,7 +11,7 @@ services:
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=AccountSystem
 
-    restart: always
+    restart: on-failure
     
   web-service:
     image: mateusmsouza4/antenas-project
